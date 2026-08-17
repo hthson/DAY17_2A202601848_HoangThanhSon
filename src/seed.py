@@ -58,6 +58,32 @@ def main() -> None:
         for user in dataset["users"]:
             ingest_user_stage(client, user, stage)
 
+    console.print("[cyan]Waiting for user graph indexing...[/cyan]")
+    wait_for_search(
+        client,
+        user_id="minh-lab17",
+        query="benchmark report LAB-REPORT-1600",
+        expected="LAB-REPORT-1600",
+    )
+    wait_for_search(
+        client,
+        user_id="minh-lab17",
+        query="BLUEBIRD-42 TypeScript NestJS",
+        expected="BLUEBIRD-42",
+    )
+    wait_for_search(
+        client,
+        user_id="minh-lab17",
+        query="ASYNC-FIX-20 ClientSession",
+        expected="ASYNC-FIX-20",
+    )
+    wait_for_search(
+        client,
+        user_id="lan-lab17",
+        query="LOTUS-88 Java Spring Boot",
+        expected="LOTUS-88",
+    )
+
     console.print("[green]Seed complete.[/green]")
     console.print("Use: python -m src.evaluate --impl student --reuse-seeded")
 

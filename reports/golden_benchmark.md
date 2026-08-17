@@ -5,32 +5,32 @@
 - Cases: **20**
 - Passed: **18/20**
 - Evidence hit rate: **90.0%**
-- Average retrieval latency: **1024.9 ms**
-- Average token reduction vs full source context: **4.2%**
+- Average retrieval latency: **1015.1 ms**
+- Average token reduction vs full source context: **5.8%**
 - Golden bonus: **0/10** (100% required)
 
 | Case | Layer | Pass | Latency ms | Retrieved tokens | Token reduction | Missing / Error |
 | --- | --- | --- | ---: | ---: | ---: | --- |
-| G01 | short_term | PASS | 0.2 | 227 | 0.0% |  |
+| G01 | short_term | PASS | 0.3 | 227 | 0.0% |  |
 | G02 | short_term | PASS | 0.0 | 133 | 0.0% |  |
-| G06 | long_term | PASS | 1394.5 | 698 | 0.0% |  |
-| G09 | semantic | PASS | 215.8 | 418 | 8.9% |  |
-| G10 | semantic | PASS | 204.5 | 270 | 41.2% |  |
-| G14 | mixed | PASS | 1437.9 | 581 | 0.0% |  |
-| G03 | long_term | PASS | 1308.9 | 1474 | 0.0% |  |
-| G04 | long_term | PASS | 1149.7 | 1459 | 0.0% |  |
-| G07 | episodic | PASS | 213.6 | 320 | 0.0% |  |
-| G08 | episodic | PASS | 238.5 | 339 | 0.0% |  |
-| G11 | mixed | PASS | 1421.1 | 581 | 0.0% |  |
-| G13 | mixed | PASS | 437.2 | 500 | 11.5% |  |
-| G15 | mixed | PASS | 2890.7 | 831 | 0.0% |  |
-| G16 | mixed | FAIL | 1339.1 | 581 | 0.0% | missing=LAB-REPORT-1600 |
-| G17 | mixed | PASS | 1373.2 | 581 | 0.0% |  |
-| G18 | mixed | FAIL | 502.7 | 500 | 11.5% | missing=BUDGET-10-4-3-3 |
-| G19 | mixed | PASS | 2026.2 | 581 | 0.0% |  |
-| G05 | long_term | PASS | 1275.3 | 1467 | 0.0% |  |
-| G12 | mixed | PASS | 1525.0 | 560 | 11.4% |  |
-| G20 | mixed | PASS | 1544.2 | 756 | 0.0% |  |
+| G06 | long_term | PASS | 1442.5 | 698 | 0.0% |  |
+| G09 | semantic | PASS | 377.1 | 365 | 20.5% |  |
+| G10 | semantic | PASS | 266.9 | 217 | 52.7% |  |
+| G14 | mixed | PASS | 1539.5 | 553 | 0.0% |  |
+| G03 | long_term | PASS | 1305.2 | 1461 | 0.0% |  |
+| G04 | long_term | PASS | 1655.4 | 1454 | 0.0% |  |
+| G07 | episodic | PASS | 276.7 | 320 | 0.0% |  |
+| G08 | episodic | PASS | 258.2 | 339 | 0.0% |  |
+| G11 | mixed | PASS | 1650.4 | 569 | 0.0% |  |
+| G13 | mixed | PASS | 496.2 | 500 | 11.5% |  |
+| G15 | mixed | PASS | 1812.0 | 831 | 0.0% |  |
+| G16 | mixed | FAIL | 1452.4 | 581 | 0.0% | missing=LAB-REPORT-1600 |
+| G17 | mixed | PASS | 1474.5 | 581 | 0.0% |  |
+| G18 | mixed | FAIL | 478.5 | 500 | 11.5% | missing=BUDGET-10-4-3-3 |
+| G19 | mixed | PASS | 1533.8 | 581 | 0.0% |  |
+| G05 | long_term | PASS | 1245.4 | 1455 | 0.0% |  |
+| G12 | mixed | PASS | 1516.0 | 507 | 19.8% |  |
+| G20 | mixed | PASS | 1521.5 | 756 | 0.0% |  |
 
 ## Evidence excerpts
 
