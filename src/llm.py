@@ -43,6 +43,9 @@ def _to_contents(history: list[dict[str, str]]) -> list[dict[str, Any]]:
     return contents
 
 
+import time
+
+
 def generate_reply(
     memory_context: str,
     history: list[dict[str, str]],
@@ -50,12 +53,7 @@ def generate_reply(
     *,
     model: str | None = None,
 ) -> str:
-    """Generate a grounded assistant reply with Gemini.
-
-    Raises RuntimeError if no key, and lets SDK/network errors bubble up so the
-    UI can surface them. `history` should include the latest user turn or not —
-    `user_message` is appended as the final user turn regardless.
-    """
+    """Generate a grounded assistant reply with Gemini with retry for transient network drops."""
     if not settings.gemini_api_key:
         raise RuntimeError(
             "GEMINI_API_KEY is missing. Copy .env.example to .env and add a "
@@ -81,13 +79,28 @@ def generate_reply(
     contents = _to_contents(history)
     contents.append({"role": "user", "parts": [{"text": grounding}]})
 
-    response = client.models.generate_content(
-        model=model_name,
-        contents=contents,
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM_INSTRUCTION,
-            temperature=0.3,
-            max_output_tokens=800,
-        ),
-    )
-    return (getattr(response, "text", "") or "").strip()
+    max_retries = 3
+    last_exc: Exception | None = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=contents,
+                config=types.GenerateContentConfig(
+                    system_instruction=SYSTEM_INSTRUCTION,
+                    temperature=0.3,
+                    max_output_tokens=800,
+                ),
+            )
+            return (getattr(response, "text", "") or "").strip()
+        except Exception as exc:
+            last_exc = exc
+            if attempt < max_retries:
+                time.sleep(1.0 * attempt)
+            else:
+                break
+
+    if last_exc:
+        # Fallback to grounded summary if network fails after retries
+        return f"_(Lỗi kết nối Gemini: {last_exc}. Dưới đây là thông tin bộ nhớ đã truy xuất)_\n\n{memory_context}"
+    return ""
